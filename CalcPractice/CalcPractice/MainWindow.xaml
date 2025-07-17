@@ -5,135 +5,134 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CalcPractice"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="WPF Калькулятор" Height="450" Width="350"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+
+	<Window.Resources>
+		<!-- Стиль для кнопок цифр -->
+		<Style x:Key="NumberButtonStyle" TargetType="Button">
+			<Setter Property="FontSize" Value="20"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="Background" Value="LightGray"/>
+			<Setter Property="Margin" Value="2"/>
+			<Setter Property="BorderThickness" Value="1"/>
+			<Setter Property="BorderBrush" Value="DarkGray"/>
+		</Style>
+
+		<!-- Стиль для кнопок операций -->
+		<Style x:Key="OperationButtonStyle" TargetType="Button" BasedOn="{StaticResource NumberButtonStyle}">
+			<Setter Property="Background" Value="Orange"/>
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+
+		<!-- Стиль для кнопки очистки -->
+		<Style x:Key="ClearButtonStyle" TargetType="Button" BasedOn="{StaticResource NumberButtonStyle}">
+			<Setter Property="Background" Value="Tomato"/>
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+	</Window.Resources>
+
 	<Grid>
-
-	</Grid>
-	
-<Window.Resources>
-	<!-- Стиль для кнопок цифр -->
-	<Style x:Key="NumberButtonStyle" TargetType="Button">
-		<Setter Property="FontSize" Value="20"/>
-		<Setter Property="FontWeight" Value="Bold"/>
-		<Setter Property="Background" Value="LightGray"/>
-		<Setter Property="Margin" Value="2"/>
-		<Setter Property="BorderThickness" Value="1"/>
-		<Setter Property="BorderBrush" Value="DarkGray"/>
-	</Style>
-
-	<!-- Стиль для кнопок операций -->
-	<Style x:Key="OperationButtonStyle" TargetType="Button" BasedOn="{StaticResource NumberButtonStyle}">
-		<Setter Property="Background" Value="Orange"/>
-		<Setter Property="Foreground" Value="White"/>
-	</Style>
-
-	<!-- Стиль для кнопки очистки -->
-	<Style x:Key="ClearButtonStyle" TargetType="Button" BasedOn="{StaticResource NumberButtonStyle}">
-		<Setter Property="Background" Value="Tomato"/>
-		<Setter Property="Foreground" Value="White"/>
-	</Style>
-</Window.Resources>
-
-<Grid>
-	<Grid.RowDefinitions>
-		<RowDefinition Height="Auto"/>
-		<RowDefinition Height="Auto"/>
-		<RowDefinition Height="*"/>
-	</Grid.RowDefinitions>
-
-	<!-- Дисплей для операции -->
-	<Border Grid.Row="0" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0,0,0,1">
-		<TextBox x:Name="OperationDisplay"
-				 Text=""
-				 FontSize="16"
-				 Foreground="Gray"
-				 HorizontalAlignment="Stretch"
-				 VerticalAlignment="Center"
-				 TextAlignment="Right"
-				 Margin="10"
-				 IsReadOnly="True"
-				 BorderThickness="0"/>
-	</Border>
-
-	<!-- Дисплей калькулятора -->
-	<Border Grid.Row="1" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0,0,0,1">
-		<TextBox x:Name="Display"
-				 Text="0"
-				 FontSize="32"
-				 HorizontalAlignment="Stretch"
-				 VerticalAlignment="Center"
-				 TextAlignment="Right"
-				 Margin="10"
-				 IsReadOnly="True"
-				 BorderThickness="0"/>
-	</Border>
-
-	<!-- Панель кнопок -->
-	<Grid Grid.Row="2">
 		<Grid.RowDefinitions>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
+		<!-- Дисплей для операции -->
+		<Border Grid.Row="0" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0,0,0,1">
+			<TextBox x:Name="OperationDisplay"
+                     Text=""
+                     FontSize="16"
+                     Foreground="Gray"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Center"
+                     TextAlignment="Right"
+                     Margin="10"
+                     IsReadOnly="True"
+                     BorderThickness="0"/>
+		</Border>
 
-		<!-- Первый ряд -->
-		<Button x:Name="BtnClear" Content="C" Grid.Row="0" Grid.Column="0"
-				Style="{StaticResource ClearButtonStyle}" Click="BtnClear_Click"/>
-		<Button x:Name="BtnBackspace" Content="⌫" Grid.Row="0" Grid.Column="1"
-				Style="{StaticResource OperationButtonStyle}" Click="BtnBackspace_Click"/>
-		<Button x:Name="BtnPercent" Content="%" Grid.Row="0" Grid.Column="2"
-				Style="{StaticResource OperationButtonStyle}" Click="OperationButton_Click"/>
-		<Button x:Name="BtnDivide" Content="/" Grid.Row="0" Grid.Column="3"
-				Style="{StaticResource OperationButtonStyle}" Click="OperationButton_Click"/>
+		<!-- Дисплей калькулятора -->
+		<Border Grid.Row="1" Background="WhiteSmoke" BorderBrush="Gray" BorderThickness="0,0,0,1">
+			<TextBox x:Name="Display"
+                     Text="0"
+                     FontSize="32"
+                     HorizontalAlignment="Stretch"
+                     VerticalAlignment="Center"
+                     TextAlignment="Right"
+                     Margin="10"
+                     IsReadOnly="True"
+                     BorderThickness="0"/>
+		</Border>
 
-		<!-- Второй ряд -->
-		<Button x:Name="Btn7" Content="7" Grid.Row="1" Grid.Column="0"
-				Style="{StaticResource NumberButtonStyle}" Click="NumberButton_Click"/>
-		<Button x:Name="Btn8" Content="8" Grid.Row="1" Grid.Column="1"
-				Style="{StaticResource NumberButtonStyle}" Click="NumberButton_Click"/>
-		<Button x:Name="Btn9" Content="9" Grid.Row="1" Grid.Column="2"
-				Style="{StaticResource NumberButtonStyle}" Click="NumberButton_Click"/>
-		<Button x:Name="BtnMultiply" Content="×" Grid.Row="1" Grid.Column="3"
-				Style="{StaticResource OperationButtonStyle}" Click="OperationButton_Click"/>
+		<!-- Панель кнопок -->
+		<Grid Grid.Row="2">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
 
-		<!-- Третий ряд -->
-		<Button x:Name="Btn4" Content="4" Grid.Row="2" Grid.Column="0"
-				Style="{StaticResource NumberButtonStyle}" Click="NumberButton_Click"/>
-		<Button x:Name="Btn5" Content="5" Grid.Row="2" Grid.Column="1"
-				Style="{StaticResource NumberButtonStyle}" Click="NumberButton_Click"/>
-		<Button x:Name="Btn6" Content="6" Grid.Row="2" Grid.Column="2"
-				Style="{StaticResource NumberButtonStyle}" Click="NumberButton_Click"/>
-		<Button x:Name="BtnSubtract" Content="-" Grid.Row="2" Grid.Column="3"
-				Style="{StaticResource OperationButtonStyle}" Click="OperationButton_Click"/>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
 
-		<!-- Четвертый ряд -->
-		<Button x:Name="Btn1" Content="1" Grid.Row="3" Grid.Column="0"
-				Style="{StaticResource NumberButtonStyle}" Click="NumberButton_Click"/>
-		<Button x:Name="Btn2" Content="2" Grid.Row="3" Grid.Column="1"
-				Style="{StaticResource NumberButtonStyle}" Click="NumberButton_Click"/>
-		<Button x:Name="Btn3" Content="3" Grid.Row="3" Grid.Column="2"
-				Style="{StaticResource NumberButtonStyle}" Click="NumberButton_Click"/>
-		<Button x:Name="BtnAdd" Content="+" Grid.Row="3" Grid.Column="3"
-				Style="{StaticResource OperationButtonStyle}" Click="OperationButton_Click"/>
+			<!-- Первый ряд -->
+			<Button x:Name="BtnClear" Content="C" Grid.Row="0" Grid.Column="0"
+                    Style="{StaticResource ClearButtonStyle}" Click="BtnClear_Click"/>
+			<Button x:Name="BtnBackspace" Content="⌫" Grid.Row="0" Grid.Column="1"
+                    Style="{StaticResource OperationButtonStyle}" Click="BtnBackspace_Click"/>
+			<Button x:Name="BtnPercent" Content="%" Grid.Row="0" Grid.Column="2"
+                    Style="{StaticResource OperationButtonStyle}" Click="OperationButton_Click"/>
+			<Button x:Name="BtnDivide" Content="/" Grid.Row="0" Grid.Column="3"
+                    Style="{StaticResource OperationButtonStyle}" Click="OperationButton_Click"/>
 
-		<!-- Пятый ряд -->
-		<Button x:Name="Btn0" Content="0" Grid.Row="4" Grid.Column="0"
-				Style="{StaticResource NumberButtonStyle}" Click="NumberButton_Click"/>
-		<Button x:Name="BtnDecimal" Content="," Grid.Row="4" Grid.Column="1"
-				Style="{StaticResource NumberButtonStyle}" Click="BtnDecimal_Click"/>
-		<Button x:Name="BtnEquals" Content="=" Grid.Row="4" Grid.Column="2"
-				Style="{StaticResource OperationButtonStyle}" Click="BtnEquals_Click" Margin="2,2,2,2"/>
-		<Button x:Name="BtnPower" Content="^" Grid.Row="4" Grid.Column="3"
-				Style="{StaticResource OperationButtonStyle}" Click="OperationButton_Click" Margin="2,2,2,2"/>
+			<!-- Второй ряд -->
+			<Button x:Name="Btn7" Content="7" Grid.Row="1" Grid.Column="0"
+                    Style="{StaticResource NumberButtonStyle}" Click="NumberButton_Click"/>
+			<Button x:Name="Btn8" Content="8" Grid.Row="1" Grid.Column="1"
+                    Style="{StaticResource NumberButtonStyle}" Click="NumberButton_Click"/>
+			<Button x:Name="Btn9" Content="9" Grid.Row="1" Grid.Column="2"
+                    Style="{StaticResource NumberButtonStyle}" Click="NumberButton_Click"/>
+			<Button x:Name="BtnMultiply" Content="×" Grid.Row="1" Grid.Column="3"
+                    Style="{StaticResource OperationButtonStyle}" Click="OperationButton_Click"/>
+
+			<!-- Третий ряд -->
+			<Button x:Name="Btn4" Content="4" Grid.Row="2" Grid.Column="0"
+                    Style="{StaticResource NumberButtonStyle}" Click="NumberButton_Click"/>
+			<Button x:Name="Btn5" Content="5" Grid.Row="2" Grid.Column="1"
+                    Style="{StaticResource NumberButtonStyle}" Click="NumberButton_Click"/>
+			<Button x:Name="Btn6" Content="6" Grid.Row="2" Grid.Column="2"
+                    Style="{StaticResource NumberButtonStyle}" Click="NumberButton_Click"/>
+			<Button x:Name="BtnSubtract" Content="-" Grid.Row="2" Grid.Column="3"
+                    Style="{StaticResource OperationButtonStyle}" Click="OperationButton_Click"/>
+
+			<!-- Четвертый ряд -->
+			<Button x:Name="Btn1" Content="1" Grid.Row="3" Grid.Column="0"
+                    Style="{StaticResource NumberButtonStyle}" Click="NumberButton_Click"/>
+			<Button x:Name="Btn2" Content="2" Grid.Row="3" Grid.Column="1"
+                    Style="{StaticResource NumberButtonStyle}" Click="NumberButton_Click"/>
+			<Button x:Name="Btn3" Content="3" Grid.Row="3" Grid.Column="2"
+                    Style="{StaticResource NumberButtonStyle}" Click="NumberButton_Click"/>
+			<Button x:Name="BtnAdd" Content="+" Grid.Row="3" Grid.Column="3"
+                    Style="{StaticResource OperationButtonStyle}" Click="OperationButton_Click"/>
+
+			<!-- Пятый ряд -->
+			<Button x:Name="Btn0" Content="0" Grid.Row="4" Grid.Column="0"
+                    Style="{StaticResource NumberButtonStyle}" Click="NumberButton_Click"/>
+			<Button x:Name="BtnDecimal" Content="," Grid.Row="4" Grid.Column="1"
+                    Style="{StaticResource NumberButtonStyle}" Click="BtnDecimal_Click"/>
+			<Button x:Name="BtnEquals" Content="=" Grid.Row="4" Grid.Column="2"
+                    Style="{StaticResource OperationButtonStyle}" Click="BtnEquals_Click" Margin="2,2,2,2"/>
+			<Button x:Name="BtnPower" Content="^" Grid.Row="4" Grid.Column="3"
+                    Style="{StaticResource OperationButtonStyle}" Click="OperationButton_Click" Margin="2,2,2,2"/>
+		</Grid>
 	</Grid>
-</Grid>
 </Window>
